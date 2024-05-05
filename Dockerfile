@@ -2,6 +2,10 @@
 
 FROM python:3.9-slim
 
+COPY requirements.txt /app/requirements.txt
+COPY app.py /app/app.py
+COPY static /app/static
+
 WORKDIR /app
 
 RUN apt-get update && apt-get install -y \
@@ -11,7 +15,7 @@ RUN apt-get update && apt-get install -y \
     git \
     && rm -rf /var/lib/apt/lists/*
 
-RUN git clone https://github.com/Mumbo-Jumbo-3/country-coins-streamlit.git .
+#RUN git clone https://github.com/Mumbo-Jumbo-3/country-coins-streamlit.git .
 
 RUN pip3 install -r requirements.txt
 
