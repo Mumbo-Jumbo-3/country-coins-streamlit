@@ -3,14 +3,21 @@ import pandas as pd
 import requests
 import pydeck as pdk
 import math
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
-st.set_page_config(page_title="World Crypto Forum", page_icon="app/static/logowhite.png", layout="centered", initial_sidebar_state="auto", menu_items=None)
+st.set_page_config(page_title="World Crypto Forum", page_icon="app/static/logo.png", layout="centered", initial_sidebar_state="auto", menu_items=None)
 
-conn = st.connection("postgresql", type="sql")
+conn = st.connection(
+    "postgresql",
+    type="sql",
+    url=os.getenv("DB_URL"),
+)
 resources_df = conn.query('SELECT * FROM "Resource";', ttl="10m")
 countries_df = conn.query('SELECT * FROM "Country";', ttl="10m")
 
-st.image("static/logowhite.png", width = 200)
+st.image("static/logo.png", width = 200)
 st.title("World Crypto Forum")
 
 st.header("Country Leaderboard")
